@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SentOrderItemService } from '@app/state/sent-order-item/sent-order-item.service';
+import { SentOrders, SentOrdersQuery } from '@app/state/sent-orders';
+import { SentOrdersService } from '@app/state/sent-orders/sent-orders.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-panel',
@@ -7,13 +9,31 @@ import { SentOrderItemService } from '@app/state/sent-order-item/sent-order-item
   styleUrls: ['./order-panel.component.scss'],
 })
 export class OrderPanelComponent implements OnInit {
-  orders: Array<any> = [];
+  $orders: SentOrders[];
 
-  constructor(private sentOrderServ: SentOrderItemService) {}
+  constructor(
+    private sentOrderServ: SentOrdersService,
+    private sentOrdersQuery: SentOrdersQuery
+  ) {}
 
-  ngOnInit(): void {
-    this.sentOrderServ.onNewSentOrder().subscribe((sentOrders) => {
-      this.orders.push(sentOrders);
+  async ngOnInit() {
+    await this.sentOrderServ.getCurrentOrders();
+    this.sentOrdersQuery.getSentOrders$.subscribe(
+      (currentSentOrders: SentOrders[]) => {
+        this.$orders = currentSentOrders;
+      }
+    );
+    this.sentOrderServ.onNewSentOrder().subscribe((sentOrder: SentOrders) => {
+      this.$orders.push(sentOrder);
     });
+    this.sentOrderServ
+      .responseAfterDeleteOrder()
+      .subscribe((sentOrders: SentOrders[]) => {
+        this.$orders = sentOrders;
+      });
+  }
+
+  async onComplete(completeOrder: SentOrders) {
+    await this.sentOrderServ.onCompleteSentOrder(completeOrder);
   }
 }

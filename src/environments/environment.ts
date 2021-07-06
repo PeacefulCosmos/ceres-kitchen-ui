@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   baseUrl: 'http://localhost:3100',
   api: `http://localhost:3100/api`,
+  testUser: { username: '123', password: '123' },
+  testCompanyId: '2260295',
 };
 
 /*

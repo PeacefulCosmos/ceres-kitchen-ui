@@ -1,0 +1,57 @@
+.logo {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+mat-grid-tile {
+  background: lightblue;
+  border-radius: 5em;
+  border: solid 2px #000;
+}
+
+mat-card {
+  width: 90%;
+  height: 90%;
+  mat-divider {
+    position: relative;
+  }
+}
+
+.title {
+  text-align: center;
+}
+.content {
+  width: 100%;
+  height: 80%;
+}
+.footer {
+  width: 95%;
+  height: 8%;
+}
+
+.order-time {
+  float: left;
+  font-size: large;
+}
+
+mat-list-item {
+  font-size: xx-large;
+}
+
+mat-card-footer {
+  margin: 0 0 0 0;
+  display: table-cell;
+}
+button {
+  float: right;
+  font-size: x-large;
+}
+// mat-grid-list {
+//   border: medium;
+//   border-color: blueviolet;
+// }
