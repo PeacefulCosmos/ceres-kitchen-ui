@@ -17,6 +17,9 @@ export class OrderPanelComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000 * 60 * 2);
     await this.sentOrderServ.getCurrentOrders();
     this.sentOrdersQuery.getSentOrders$.subscribe(
       (currentSentOrders: SentOrders[]) => {
