@@ -9,7 +9,7 @@
     <mat-grid-list class="mx-3" cols="5" rowHeight="2:3" [gutterSize]="'25px'">
       <ng-container *ngFor="let o of $orders">
         <mat-grid-tile class="mx-3">
-          <mat-card>
+          <div class="wrapper">
             <div class="title">
               <h1>Seat No. : {{ o.seatIndex }}</h1>
             </div>
@@ -38,7 +38,7 @@
                 </button>
               </div>
             </div>
-          </mat-card>
+          </div>
         </mat-grid-tile>
       </ng-container>
     </mat-grid-list>
